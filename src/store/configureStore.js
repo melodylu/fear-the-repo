@@ -1,5 +1,5 @@
 import rootReducer          from '../reducers';
-import thunk                from 'redux-thunk';
+import thunkMiddleware      from 'redux-thunk';
 import routes               from '../routes';
 import { reduxReactRouter } from 'redux-router';
 import createHistory        from 'history/lib/createBrowserHistory';
@@ -10,10 +10,12 @@ import {
   createStore
 } from 'redux';
 
+// import { selectReddit, fetchPosts } from '../actions/userFormActions.js';
+
 export default function configureStore (initialState, debug = false) {
   let createStoreWithMiddleware;
 
-  const middleware = applyMiddleware(thunk);
+  const middleware = applyMiddleware(thunkMiddleware);
 
   if (debug) {
     createStoreWithMiddleware = compose(

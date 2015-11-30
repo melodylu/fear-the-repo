@@ -91,6 +91,7 @@ To test the API, try this:
 
 // Find a user
 devServer.app.post('/api/findauser', function(req, res) {
+  console.log("You looked for userId: " + req.body.id)
   dbSchema.User.findOne({
       where: {
         id: req.body.id
@@ -129,8 +130,8 @@ devServer.app.post('/api/resume', function(req, res){
 devServer.app.post('/api/allusers', function(req, res) {
   dbSchema.User.findAll()
     .then(function(results) {
-      var userList = results.map(function(user){return "id: "+ user.id + " userName: " + user.userName});
-      res.send(userList);
+      // var userList = results.map(function(user){return "id: "+ user.id + ", userName: " + user.userName});
+      res.send(results);
     })
 })
 

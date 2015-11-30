@@ -1,8 +1,9 @@
+// import { fetchUser } from './actions/userFormActions.js';
+
 import React          from 'react';
 import ReactDOM       from 'react-dom';
 import Root           from './containers/Root';
 import configureStore from './store/configureStore';
-
 const target = document.getElementById('root');
 const store  = configureStore(window.__INITIAL_STATE__, __DEBUG__);
 
@@ -18,3 +19,6 @@ const node = (
   // )
 
 ReactDOM.render(node, target);
+
+// this works, where shall we put it?
+// store.dispatch(fetchUser(2))
