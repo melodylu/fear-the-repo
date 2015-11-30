@@ -42,7 +42,7 @@ export class HomeView extends React.Component {
         <br />
 
         <div>For no reason, a counter: {this.props.counter}</div>
-        <RaisedButton label='Increment' onClick={this.props.actions.increment} />
+        <RaisedButton label='Increment' onClick={this.props.actions.fetchUser} />
 
       </div>
     );
