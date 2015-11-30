@@ -80,6 +80,12 @@ Block.belongsToMany(Resume, {
 });
 
 
+
+////////////////////////////////////////////////////////////////////////////////////
+//   Turn the code below back on in order to reset the db with new model schema   //
+//                                                                                //
+////////////////////////////////////////////////////////////////////////////////////
+
 // export function buildATestUser(name) {
 //   console.log("buildATestUser() was called.")
 //   db.sync({
