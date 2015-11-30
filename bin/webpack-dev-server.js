@@ -42,12 +42,12 @@ devServer.app.use(session({
 	secret: "Backend if fun because I don't have to deal with react",
 	cookie: {httpOnly: false}
 	}));
- 
+
 devServer.app.post('/authentication',utils.checkUser);
 
 devServer.app.post('/login',function(req,res){
 	dbSchema.User.findOne({
-		where: 
+		where:
 			{
 				userName: req.body.username,
 				password: req.body.password
@@ -81,7 +81,10 @@ To test the API, try this:
 "Add a new user to the database, three flavors:""
    curl -H "Content-Type: application/json" -X POST -d '{"userName":"chrisrhoton","password":"chrisrhoton","email":"chrisrhoton","firstName":"chrisrhoton","lastName":"chrisrhoton","headline":"chrisrhoton","industry":"chrisrhoton","country":"chrisrhoton","city":"chrisrhoton","zipCode":"chrisrhoton","phoneNumber":"chrisrhoton","facebookURL":"chrisrhoton","linkedInURL":"chrisrhoton","homepageURL":"chrisrhoton","blogURL":"chrisrhoton","githubURL":"chrisrhoton","behanceURL":"chrisrhoton","web1Title":"chrisrhoton","web1URL":"chrisrhoton","web2Title":"chrisrhoton","web2URL":"chrisrhoton","pictureUrl":"chrisrhoton","positions":"chrisrhoton","summary":"chrisrhoton"}'  http://localhost:3000/api/userinfo
    curl -H "Content-Type: application/json" -X POST -d '{"userName":"seconduser","password":"seconduser","email":"seconduser","firstName":"seconduser","lastName":"seconduser","headline":"seconduser","industry":"seconduser","country":"seconduser","city":"chrisrhoton","zipCode":"chrisrhoton","phoneNumber":"chrisrhoton","facebookURL":"chrisrhoton","linkedInURL":"chrisrhoton","homepageURL":"chrisrhoton","blogURL":"chrisrhoton","githubURL":"chrisrhoton","behanceURL":"chrisrhoton","web1Title":"chrisrhoton","web1URL":"chrisrhoton","web2Title":"chrisrhoton","web2URL":"chrisrhoton","pictureUrl":"chrisrhoton","positions":"chrisrhoton","summary":"chrisrhoton"}'  http://localhost:3000/api/userinfo
-   curl -H "Content-Type: application/json" -X POST -d '{"userName":"thirdUser","password":"thirdUser","email":"thirdUser","firstName":"thirdUser","lastName":"thirdUser","headline":"thirdUser","industry":"thirdUser","country":"thirdUser","city":"thirdUser","zipCode":"thirdUser","phoneNumber":"thirdUser","facebookURL":"thirdUser","linkedInURL":"thirdUser","homepageURL":"thirdUser","blogURL":"thirdUser","githubURL":"thirdUser","behanceURL":"thirdUser","web1Title":"thirdUser","web1URL":"thirdUser","web2Title":"thirdUser","web2URL":"thirdUser","pictureUrl":"thirdUser","positions":"thirdUser","summary":"thirdUser"}'  http://localhost:3000/api/userinfo
+   curl -H "Content-Type: application/json" -X POST -d '{"userName":"thirdUser","password":"thirdUser","email":"thirdUser"}'  http://localhost:3000/api/userinfo
+
+
+   curl -H "Content-Type: application/json" -X POST -d '{"userName":"chrisrhoton","theme":"cia"}'  http://localhost:3000/api/resume
 
 */
 
@@ -97,6 +100,30 @@ devServer.app.post('/api/findauser', function(req, res) {
       res.send(results.dataValues);
     })
 })
+
+
+////Insert Query 2 : Insert resume theme into Resumes table
+devServer.app.post('/api/resume', function(req, res){
+  var myResume;
+  var myUser = req.body.userName;
+  console.log("myUser: ", myUser);
+  dbSchema.Resume.create({
+    theme: req.body.theme
+  }).then(function(resume){
+    myResume = resume;
+    console.log("myUser: ", myUser);
+      dbSchema.User.findOne({
+        where: {
+          userName: myUser
+        }
+      }).then(function(user){
+        user.addResume(myResume);
+        res.send('successfully added resume' + user.userName + myResume.theme);
+        })
+    })
+});
+
+
 
 // All users please
 devServer.app.post('/api/allusers', function(req, res) {
