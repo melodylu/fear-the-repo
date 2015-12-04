@@ -136,7 +136,7 @@ export default class BlockDumbComp extends React.Component {
     let bullet = (
         <ul>
           {this.props.children.map(item =>
-            <li key={item.key} style={styles.bullet}>{item}</li>
+            <li key={item.key} style={styles}>{item}</li>
           )}
         </ul>
       );

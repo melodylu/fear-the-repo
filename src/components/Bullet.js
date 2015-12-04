@@ -1,5 +1,5 @@
 import React, { PropTypes }       from 'react';
-import Paper                      from 'material-ui/lib/paper';
+import { RaisedButton, TextField, Paper, SelectField } from 'material-ui/lib';
 import { DragSource, DropTarget } from 'react-dnd';
 
 const Types = {
@@ -94,18 +94,18 @@ export default class Bullet extends React.Component {
     // not sure why these need to be assigned, but not companyName and jobTitle
     const { isDragging, connectDragSource, connectDropTarget } = this.props;
 
-    const styles = {
-      bulletDrag: {
-        opacity: isDragging ? 0 : 1,
-        cursor: 'move'
-      }
-    };
+
 
     return connectDragSource(connectDropTarget(
-      <div style={styles.bulletDrag}>
-        <Paper>
-          <p>{this.props.text}</p>
-        </Paper>
+      <div >
+        <TextField     underlineStyle={styles.underlineStyle}
+                       underlineFocusStyle={styles.underlineFocusStyle}
+                       style={styles.bullet}
+                       ref='bullet'
+                       hintText='bullet'
+                       defaultValue={this.props.text}
+                       />
+
       </div>
     ));
   }

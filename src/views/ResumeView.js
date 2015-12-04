@@ -11,6 +11,7 @@ import ResumeFooter from 'components/ResumeFooter';
 import ResumeSavePrint from 'components/ResumeSavePrint';
 import { moveBlock,
          dropBullet,
+         moveBullet,
          updateResumeState,
          sendResumeToServerAsync,
          updateLocalState,
@@ -243,8 +244,7 @@ class ResumeView extends React.Component {
                             findBlock={this.findBlock} />
                       );
                     })}
-
-                                 </BlockDumbComp>
+                </BlockDumbComp>
                 );
             })}
 
